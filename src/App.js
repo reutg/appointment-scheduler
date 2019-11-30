@@ -6,6 +6,7 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import Navbar from './components/Navbar'
 import Register from './components/Register'
 import ScheduleAppointment from './components/SchuduleAppointment'
+import MyAppointments from './components/doctor/MyAppointments'
 
 const theme = createMuiTheme({
   palette: {
@@ -37,8 +38,16 @@ class App extends Component {
     return (
       <Router>
         <MuiThemeProvider theme={theme}>
+          {/* <Route
+            exact
+            path='/'
+            render={({ match }) => <Events match={match} />}
+          /> */}
+          {/* <Route exact path='/register' render={({ match }) => <Register match={match} />} /> */}
           <Navbar toggleShowRegister={this.toggleShowRegister} />
           {isShowRegister && <Register />}
+          {/* <ScheduleAppointment /> */}
+          <MyAppointments />
         </MuiThemeProvider>
       </Router>
     )
