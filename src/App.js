@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+
+import Navbar from './components/Navbar'
+import Register from './components/Register'
+import ScheduleAppointment from './components/SchuduleAppointment'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#8EAEBD' },
+    secondary: { main: '#DF744A' },
+    backColor: '#BFD8D2',
+  },
+  typography: {
+    useNextVariants: true,
+    fontFamily: '"Montserrat", sans-serif',
+  },
+})
+
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      isShowRegister: false,
+    }
+  }
+
+  toggleShowRegister = () => {
+    const { isShowRegister } = this.state
+    this.setState({ isShowRegister: !isShowRegister })
+  }
+
+  render() {
+    const { isShowRegister } = this.state
+    return (
+      <Router>
+        <MuiThemeProvider theme={theme}>
+          <Navbar toggleShowRegister={this.toggleShowRegister} />
+          {isShowRegister && <Register />}
+        </MuiThemeProvider>
+      </Router>
+    )
+  }
 }
 
-export default App;
+export default App
